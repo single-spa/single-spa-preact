@@ -41,8 +41,7 @@ function bootstrap(opts) {
 function mount(opts) {
 	return new Promise((resolve, reject) => {
 		opts.preact.render(
-			opts.preact.h(opts.rootComponent),
-			getRootDomEl(opts)
+			opts.preact.h(opts.rootComponent, getRootDomEl(opts))
 		);
 
 		resolve();
