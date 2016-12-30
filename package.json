@@ -4,7 +4,7 @@
   "description": "A single spa plugin for Preact apps",
   "main": "lib/single-spa-preact.js",
   "scripts": {
-    "build": "babel src --out-dir lib"
+    "build": "rm -rf lib && babel src --out-dir lib --source-maps"
   },
   "repository": {
     "type": "git",

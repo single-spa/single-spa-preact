@@ -40,8 +40,9 @@ function bootstrap(opts) {
 
 function mount(opts) {
 	return new Promise((resolve, reject) => {
-		opts.preact.render(
-			opts.preact.h(opts.rootComponent, getRootDomEl(opts))
+		opts.renderedNode = opts.preact.render(
+			opts.preact.h(opts.rootComponent, null, null),
+			getRootDomEl(opts),
 		);
 
 		resolve();
@@ -51,9 +52,12 @@ function mount(opts) {
 function unmount(opts) {
 	return new Promise((resolve, reject) => {
 		opts.preact.render(
-			null, // see https://github.com/developit/preact/issues/53
+			() => null, // see https://github.com/developit/preact/issues/53
 			getRootDomEl(opts),
+			opts.renderedNode,
 		);
+
+		delete opts.renderedNode;
 
 		resolve();
 	});
