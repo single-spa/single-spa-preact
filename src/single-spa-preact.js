@@ -52,7 +52,7 @@ function mount(opts) {
 function unmount(opts) {
 	return new Promise((resolve, reject) => {
 		opts.preact.render(
-			() => null, // see https://github.com/developit/preact/issues/53
+			'', // see https://github.com/developit/preact/issues/53
 			getRootDomEl(opts),
 			opts.renderedNode,
 		);
