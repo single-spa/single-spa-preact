@@ -1,6 +1,6 @@
 {
   "name": "single-spa-preact",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A single spa plugin for Preact apps",
   "main": "lib/single-spa-preact.js",
   "scripts": {
