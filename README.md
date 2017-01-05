@@ -34,6 +34,6 @@ export const unmount = [
 
 All options are passed to single-spa-preact via the `opts` parameter when calling `singleSpaPreact(opts)`. The following options are available:
 
-- `preact`: (required) The main Preact object, which is generally either exposed onto the window or is available via `require('preact')` `import preact from 'preact'`.
+- `preact`: (required) The main Preact object, which is generally either exposed onto the window or is available via `require('preact')` or `import preact from 'preact'`.
 - `rootComponent`: (required) The top level preact component which will be rendered
-- `domElementGetter`: (required) A function that takes in no arguments and returns a DOMElement. This dom element is where the React application will be bootstrapped, mounted, and unmounted.
+- `domElementGetter`: (required) A function that takes in no arguments and returns a DOMElement. This dom element is where the Preact application will be bootstrapped, mounted, and unmounted.
