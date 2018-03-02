@@ -1,10 +1,10 @@
 # single-spa-preact
 
-Generic lifecycle hooks for Preact applications that are registered as [child applications](https://github.com/CanopyTax/single-spa/blob/master/docs/child-applications.md) of [single-spa](https://github.com/CanopyTax/single-spa).
+Generic lifecycle hooks for Preact applications that are registered as [applications](https://github.com/CanopyTax/single-spa/blob/master/docs/applications.md#registered-applications) of [single-spa](https://github.com/CanopyTax/single-spa).
 
 ## Quickstart
 
-First, in the child application, run `npm install --save single-spa-preact` (or `jspm install npm:single-spa-preact` if your child application is managed by jspm). Then, in your [child app's entry file](https://github.com/CanopyTax/single-spa/blob/docs-1/docs/configuring-child-applications.md#the-entry-file), do the following:
+First, in the [single-spa application](https://github.com/CanopyTax/single-spa/blob/master/docs/applications.md#registered-applications), run `npm install --save single-spa-preact`. Then, in the application's entry file, add the following.
 
 ```js
 import preact from 'preact';
