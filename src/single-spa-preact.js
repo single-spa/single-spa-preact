@@ -38,10 +38,10 @@ function bootstrap(opts) {
 	return Promise.resolve();
 }
 
-function mount(opts) {
+function mount(opts, props) {
 	return new Promise((resolve, reject) => {
 		opts.renderedNode = opts.preact.render(
-			opts.preact.h(opts.rootComponent, null, null),
+			opts.preact.h(opts.rootComponent, props, null),
 			getRootDomEl(opts),
 		);
 
