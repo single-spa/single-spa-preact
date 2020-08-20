@@ -1,43 +1,43 @@
 const defaultOpts = {
-	// required opts
-	preact: null,
-	rootComponent: null,
-	
+  // required opts
+  preact: null,
+  rootComponent: null,
+
   // optional opts
-	domElementGetter: null,
-}
+  domElementGetter: null,
+};
 
 export default function singleSpaPreact(userOpts) {
-	if (typeof userOpts !== 'object') {
-		throw new Error(`single-spa-preact requires a configuration object`);
-	}
+  if (typeof userOpts !== "object") {
+    throw new Error(`single-spa-preact requires a configuration object`);
+  }
 
-	const opts = {
-		...defaultOpts,
-		...userOpts,
-	};
+  const opts = {
+    ...defaultOpts,
+    ...userOpts,
+  };
 
-	if (!opts.preact) {
-		throw new Error(`single-spa-preact must be passed opts.preact`);
-	}
+  if (!opts.preact) {
+    throw new Error(`single-spa-preact must be passed opts.preact`);
+  }
 
-	if (!opts.rootComponent) {
-		throw new Error(`single-spa-preact must be passed opts.rootComponent`);
-	}
+  if (!opts.rootComponent) {
+    throw new Error(`single-spa-preact must be passed opts.rootComponent`);
+  }
 
-	return {
-		bootstrap: bootstrap.bind(null, opts),
-		mount: mount.bind(null, opts),
-		unmount: unmount.bind(null, opts),
-	};
+  return {
+    bootstrap: bootstrap.bind(null, opts),
+    mount: mount.bind(null, opts),
+    unmount: unmount.bind(null, opts),
+  };
 }
 
 function bootstrap(opts) {
-	return Promise.resolve();
+  return Promise.resolve();
 }
 
 function mount(opts, props) {
-	return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const domElementGetter = chooseDomElementGetter(opts, props);
 
     if (typeof domElementGetter !== "function") {
@@ -48,39 +48,41 @@ function mount(opts, props) {
       );
     }
 
-		opts.renderedNode = opts.preact.render(
-			opts.preact.h(opts.rootComponent, props, null),
-			getRootDomEl(domElementGetter, props),
-		);
+    opts.renderedNode = opts.preact.render(
+      opts.preact.h(opts.rootComponent, props, null),
+      getRootDomEl(domElementGetter, props)
+    );
 
-		resolve();
-	});
+    resolve();
+  });
 }
 
 function unmount(opts, props) {
-	return new Promise((resolve, reject) => {
-		const domElementGetter = chooseDomElementGetter(opts, props);
-		
-		opts.preact.render(
-			'', // see https://github.com/developit/preact/issues/53
-			getRootDomEl(domElementGetter, opts),
-			opts.renderedNode,
-		);
+  return new Promise((resolve, reject) => {
+    const domElementGetter = chooseDomElementGetter(opts, props);
 
-		delete opts.renderedNode;
+    opts.preact.render(
+      "", // see https://github.com/developit/preact/issues/53
+      getRootDomEl(domElementGetter, opts),
+      opts.renderedNode
+    );
 
-		resolve();
-	});
+    delete opts.renderedNode;
+
+    resolve();
+  });
 }
 
 function getRootDomEl(domElementGetter, props) {
-	const el = domElementGetter(props);
+  const el = domElementGetter(props);
 
-	if (!el) {
-		throw new Error(`single-spa-preact: domElementGetter function did not return a valid dom element`);
-	}
+  if (!el) {
+    throw new Error(
+      `single-spa-preact: domElementGetter function did not return a valid dom element`
+    );
+  }
 
-	return el;
+  return el;
 }
 
 function chooseDomElementGetter(opts, props) {
